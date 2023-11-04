@@ -1,0 +1,55 @@
+//From Hallermann et al. 2012, unmyelinated axon version
+proc celldef() {
+  topol()
+  subsets()
+  geom()
+  biophys()
+  geom_nseg()
+}
+
+axonNum		=	2
+
+create axon[axonNum]
+
+// axon[0] is AIS
+
+proc topol() { local i
+
+connect axon[1](0), axon[0](1)
+
+basic_shape()
+}
+
+
+
+proc basic_shape() {
+
+
+axon[0] {pt3dclear()
+  pt3dadd(-2000, 0, 0, 2) pt3dadd(0, 0, 0, 2)}
+
+axon[1] {pt3dclear()
+  pt3dadd(0, 0, 0, 2) pt3dadd(4000, 0, 0, 2)}
+
+
+}
+
+objref all, axonal
+proc subsets() { local i
+  objref all, axonal
+  all = new SectionList()
+    axon all.append()
+
+  axonal = new SectionList()
+    axon axonal.append()
+
+}
+proc geom() {
+}
+proc geom_nseg() {
+}
+proc biophys() {
+}
+access axon[0]
+
+celldef()
